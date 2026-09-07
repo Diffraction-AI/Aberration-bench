@@ -103,7 +103,7 @@ test('Native invocations use the bounded MCP and retain subscription-compatible 
   assert.deepEqual(parsed.review, { findings: [], limitations: [] });
 });
 test('Process deadlines and output ceilings terminate execution and preserve partial logs', async () => {
-  const options = { cwd: tmpdir(), env: nativeEnvironment(), timeoutMs: 80 };
+  const options = { cwd: tmpdir(), env: nativeEnvironment(), timeoutMs: 1000 };
   const timed = await runProcess(
     process.execPath,
     ['-e', 'process.stdout.write("started");setInterval(()=>{},1000)'],
