@@ -1,0 +1,16 @@
+* { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.5 system-ui,sans-serif; color: #1c2430; background: #fafafa; }
+main { max-width: 1000px; padding: 24px; margin: auto; }
+header { display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+a { color: inherit; } button,a { cursor: pointer; }
+section { margin-top: 48px; } h1 { font-size: 32px; line-height: 1.2; }
+.product { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; }
+.cover { min-height: 260px; background: #2456a3; color: white; padding: 32px; letter-spacing: 2px; }
+button { padding: 10px 16px; border: 1px solid #818997; border-radius: 6px; background: white; color: inherit; font: inherit; }
+#checkout { background: #2456a3; color: white; }
+input { display: block; width: 100px; font: inherit; padding: 8px; }
+:focus-visible { outline: 3px solid #c06800; outline-offset: 3px; }
+.fine-print { font-size: 14px; }
+dialog { border: 1px solid #818997; border-radius: 8px; max-width: 90vw; }
+dialog::backdrop { background: #17223380; }
+@media (max-width: 600px) { .product { grid-template-columns: 1fr; gap: 24px; } }

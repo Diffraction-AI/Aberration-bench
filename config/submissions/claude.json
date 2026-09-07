@@ -1,0 +1,7 @@
+{
+  "id": "claude-subscription",
+  "adapter": "claude",
+  "access": "subscription",
+  "model": null,
+  "executable": "claude"
+}

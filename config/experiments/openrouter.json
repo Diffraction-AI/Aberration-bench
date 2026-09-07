@@ -1,0 +1,10 @@
+{
+  "suite": "../../.generated/verification/suite.json",
+  "submissions": ["../submissions/openrouter.json"],
+  "track": "prepared",
+  "profile": "standard",
+  "repetitions": 1,
+  "seed": 20260907,
+  "maxApiAllocationUsd": 1,
+  "cases": ["a01"]
+}

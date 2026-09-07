@@ -1,0 +1,8 @@
+[
+  { "id": "a01", "family": "responsive-action", "kind": "regression", "mutation": "hide-mobile-action", "expectedDefectIds": ["mobile-action-unavailable"] },
+  { "id": "a02", "family": "responsive-action", "kind": "clean", "mutation": "copy", "expectedDefectIds": [] },
+  { "id": "a03", "family": "dialog-dismissal", "kind": "regression", "mutation": "prevent-cancel", "expectedDefectIds": ["escape-dismissal-broken"] },
+  { "id": "a04", "family": "dialog-dismissal", "kind": "clean", "mutation": "copy", "expectedDefectIds": [] },
+  { "id": "a05", "family": "order-state", "kind": "regression", "mutation": "stale-total", "expectedDefectIds": ["order-total-stale"] },
+  { "id": "a06", "family": "order-state", "kind": "clean", "mutation": "copy", "expectedDefectIds": [] }
+]

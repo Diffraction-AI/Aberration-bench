@@ -1,0 +1,9 @@
+{
+  "suite": "../../.generated/verification/suite.json",
+  "submissions": ["../submissions/reference.json"],
+  "track": "prepared",
+  "profile": "standard",
+  "repetitions": 1,
+  "seed": 20260907,
+  "maxApiAllocationUsd": 0
+}

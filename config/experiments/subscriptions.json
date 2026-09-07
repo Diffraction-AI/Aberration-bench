@@ -1,0 +1,13 @@
+{
+  "suite": "../../.generated/verification/suite.json",
+  "submissions": [
+    "../submissions/codex.json",
+    "../submissions/claude.json",
+    "../submissions/cursor.json"
+  ],
+  "track": "prepared",
+  "profile": "standard",
+  "repetitions": 3,
+  "seed": 20260907,
+  "maxApiAllocationUsd": 0
+}

@@ -1,0 +1,8 @@
+{
+  "id": "openrouter-reviewer",
+  "adapter": "openrouter",
+  "access": "api",
+  "model": null,
+  "credentialEnv": "OPENROUTER_API_KEY",
+  "maxRequestReservationUsd": 0.1
+}

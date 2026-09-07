@@ -1,0 +1,16 @@
+{
+  "version": "0.1.0-draft",
+  "primaryTrack": "prepared",
+  "tracks": ["prepared", "end-to-end"],
+  "profiles": [
+    { "id": "economy", "maxUsd": 0.25, "maxSeconds": 300 },
+    { "id": "standard", "maxUsd": 1, "maxSeconds": 600 },
+    { "id": "extended", "maxUsd": 5, "maxSeconds": 1800 }
+  ],
+  "primaryProfile": "standard",
+  "pilotRepetitions": 3,
+  "releaseRepetitions": 5,
+  "seed": 20260907,
+  "candidateCatalog": "evaluator/candidates.json",
+  "suite": "evaluator/suite.json"
+}

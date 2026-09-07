@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fieldwork Supply</title><link rel="stylesheet" href="style.css"></head>
+<body><main><header><a href="/">Fieldwork Supply</a><button id="help">Delivery information</button></header>
+<section><h1>Everyday notebook</h1><p>A refillable notebook for your next project.</p>
+<div class="product"><div class="cover" aria-label="Blue notebook">FIELD NOTES</div><div>
+<h2>Build your order</h2><p>$12 per notebook</p><label for="quantity">Quantity</label>
+<input id="quantity" type="number" min="1" max="10" value="1">
+<p>Total: <strong id="total">$12.00</strong></p><button id="checkout">Continue to checkout</button>
+<p id="confirmation" role="status"></p><p class="fine-print">Orders ship within two business days.</p>
+</div></div></section>
+<dialog id="delivery"><h2>Delivery information</h2><p>Standard delivery takes 3–5 business days.</p><button id="close">Close</button></dialog>
+</main><script src="app.js"></script></body></html>
