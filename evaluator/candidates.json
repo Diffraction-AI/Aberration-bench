@@ -1,0 +1,97 @@
+{
+  "researchedAt": "2026-09-07T05:32:06.233688+00:00",
+  "provenance": "Public upstream PR metadata, carried from Diffraction research on 2026-09-07. Not independently re-admitted by Aberration-bench.",
+  "cases": [
+    {
+      "id": "starlight-4008",
+      "repository": "withastro/starlight",
+      "upstreamPullRequest": "https://github.com/withastro/starlight/pull/4008",
+      "title": "fix(css): prevent TOC overflow with custom --sl-content-width",
+      "buggySha": "96f63600815498078e52135a1be93fabc6671587",
+      "fixedSha": "58a352097016ffbd98716688e4f2dfb97e5a6f44",
+      "licenseAtResearch": "MIT",
+      "status": "candidate",
+      "split": "development",
+      "admission": "Reproduce both states independently; isolate a reverse-fix regression and a benign control; verify license and pinned builds before admission.",
+      "contamination": "Public issue and fix; already considered in Diffraction development. Ineligible as an untouched release holdout."
+    },
+    {
+      "id": "vitepress-5086",
+      "repository": "vuejs/vitepress",
+      "upstreamPullRequest": "https://github.com/vuejs/vitepress/pull/5086",
+      "title": "fix: highlight active link in mobile nav menu",
+      "buggySha": "b2008654ffaf0d8f8c425e88592e9ed2f8791506",
+      "fixedSha": "923aa902523739bfb9d77aed376ebc73c32eeb33",
+      "licenseAtResearch": "MIT",
+      "status": "candidate",
+      "split": "development",
+      "admission": "Reproduce both states independently; isolate a reverse-fix regression and a benign control; verify license and pinned builds before admission.",
+      "contamination": "Public issue and fix; already considered in Diffraction development. Ineligible as an untouched release holdout."
+    },
+    {
+      "id": "vitepress-5367",
+      "repository": "vuejs/vitepress",
+      "upstreamPullRequest": "https://github.com/vuejs/vitepress/pull/5367",
+      "title": "fix(theme): prevent scroll chaining in local nav outline dropdown",
+      "buggySha": "49c84f570a933a2b5a95411bfd419b7369ab02a7",
+      "fixedSha": "0a96bae50b907b70a3cd712f98514ce77086496a",
+      "licenseAtResearch": "MIT",
+      "status": "candidate",
+      "split": "development",
+      "admission": "Reproduce both states independently; isolate a reverse-fix regression and a benign control; verify license and pinned builds before admission.",
+      "contamination": "Public issue and fix; already considered in Diffraction development. Ineligible as an untouched release holdout."
+    },
+    {
+      "id": "astrowind-646",
+      "repository": "arthelokyo/astrowind",
+      "upstreamPullRequest": "https://github.com/arthelokyo/astrowind/pull/646",
+      "title": "Fix flickering when toggling theme #643",
+      "buggySha": "2e8f6ec459bc7363928f6c3bb1f5ea0c929930c6",
+      "fixedSha": "ed3cc87a413cd364e6d8a189378771e7ef4bccc4",
+      "licenseAtResearch": "MIT",
+      "status": "candidate",
+      "split": "development",
+      "admission": "Reproduce both states independently; isolate a reverse-fix regression and a benign control; verify license and pinned builds before admission.",
+      "contamination": "Public issue and fix; already considered in Diffraction development. Ineligible as an untouched release holdout."
+    },
+    {
+      "id": "excalidraw-9279",
+      "repository": "excalidraw/excalidraw",
+      "upstreamPullRequest": "https://github.com/excalidraw/excalidraw/pull/9279",
+      "title": "fix: prevent search menu from opening when dialog is open",
+      "buggySha": "6c0ff7fc5c45719a7a659f613be169ce8bf295da",
+      "fixedSha": "56c05b30999957430e6854825d3c6367b5bd3fec",
+      "licenseAtResearch": "MIT",
+      "status": "candidate",
+      "split": "development",
+      "admission": "Reproduce both states independently; isolate a reverse-fix regression and a benign control; verify license and pinned builds before admission.",
+      "contamination": "Public issue and fix; already considered in Diffraction development. Ineligible as an untouched release holdout."
+    },
+    {
+      "id": "daisyui-4724",
+      "repository": "saadeghi/daisyui",
+      "upstreamPullRequest": "https://github.com/saadeghi/daisyui/pull/4724",
+      "title": "fix(breadcrumbs): focus ring is clipped on the first and last item",
+      "buggySha": "8d4080106361a38d9d7d19a9adc48c3101033886",
+      "fixedSha": "cc339e74d6de53c7bab8e225ffbb6390fee24e87",
+      "licenseAtResearch": "MIT",
+      "status": "candidate",
+      "split": "development",
+      "admission": "Reproduce both states independently; isolate a reverse-fix regression and a benign control; verify license and pinned builds before admission.",
+      "contamination": "Public issue and fix; already considered in Diffraction development. Ineligible as an untouched release holdout."
+    },
+    {
+      "id": "daisyui-4712",
+      "repository": "saadeghi/daisyui",
+      "upstreamPullRequest": "https://github.com/saadeghi/daisyui/pull/4712",
+      "title": "fix(skeleton): mirror the shimmer direction in RTL",
+      "buggySha": "95e3780a62c3f2d5e7496a11a8e1a245c140fc2b",
+      "fixedSha": "16a2857f3f9a7a7ad73aa631c95c6f3db39638e6",
+      "licenseAtResearch": "MIT",
+      "status": "candidate",
+      "split": "development",
+      "admission": "Reproduce both states independently; isolate a reverse-fix regression and a benign control; verify license and pinned builds before admission.",
+      "contamination": "Public issue and fix; already considered in Diffraction development. Ineligible as an untouched release holdout."
+    }
+  ]
+}

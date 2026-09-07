@@ -1,0 +1,7 @@
+{
+  "id": "codex-subscription",
+  "adapter": "codex",
+  "access": "subscription",
+  "model": null,
+  "executable": "codex"
+}

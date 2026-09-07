@@ -1,0 +1,13 @@
+node_modules/
+runs/
+artifacts/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.tsbuildinfo
+.venv/
+__pycache__/
+.cache/
+.generated/
+jobs/

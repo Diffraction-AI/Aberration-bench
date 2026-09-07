@@ -1,0 +1,7 @@
+{
+  "id": "cursor-subscription",
+  "adapter": "cursor",
+  "access": "subscription",
+  "model": null,
+  "executable": "agent"
+}
