@@ -1,4 +1,4 @@
-import { mkdirSync, copyFileSync } from 'node:fs';
+import { mkdirSync, copyFileSync, existsSync } from 'node:fs';
 import { resolve, join, dirname, extname } from 'node:path';
 import { randomBytes } from 'node:crypto';
 import { Plan, Trial } from './contracts.ts';
@@ -16,12 +16,16 @@ export function adjudicationPacket(planInput: PlanData, runsInput: string, outpu
   mkdirSync(join(output, 'evaluator'));
   const mapping = [];
   for (const slot of plan.slots) {
-    const directory = join(runs, slot.id),
-      trial = Trial.parse(jsonFile(join(directory, 'trial.json')));
+    const directory = join(runs, slot.id);
+    const alias = randomBytes(12).toString('hex');
+    if (!existsSync(join(directory, 'trial.json'))) {
+      mapping.push({ alias, slotId: slot.id, caseId: slot.caseId, submissionId: slot.submissionId, status: 'missing' });
+      continue;
+    }
+    const trial = Trial.parse(jsonFile(join(directory, 'trial.json')));
     if (trial.slotId !== slot.id) throw new Error('Trial does not match planned slot');
     verifyArtifacts(trial, join(directory, 'artifacts'));
-    const alias = randomBytes(12).toString('hex'),
-      dest = join(output, 'reviewer', alias);
+    const dest = join(output, 'reviewer', alias);
     mkdirSync(dest);
     for (const finding of trial.review.findings)
       for (const artifact of finding.evidence) {
@@ -66,11 +70,13 @@ export function adjudicationPacket(planInput: PlanData, runsInput: string, outpu
   }
   saveJson(join(output, 'evaluator/mapping.json'), mapping);
   return {
-    packets: mapping.length,
+    packets: mapping.filter(row => row.status !== 'missing').length,
+    missingSlots: mapping.filter(row => row.status === 'missing').length,
+    expectedSlots: plan.slots.length,
     reviewerDirectory: join(output, 'reviewer'),
     mapping: join(output, 'evaluator/mapping.json'),
     coverageDirectory: join(output, 'evaluator/coverage'),
     instructions:
-      'Give reviewers only the reviewer directory plus case reproduction materials. After blinded claim judgments, the evaluator supplies the preserved coverage traces; those traces may identify participants. Verify actual required-target actions, then resolve aliases using the evaluator mapping when saving schema-valid adjudications. Drafts are deliberately not accepted by the scorer.',
+      'Give reviewers only the reviewer directory plus case reproduction materials. After blinded claim judgments, the evaluator supplies the preserved coverage traces; those traces may identify participants. Verify actual required-target actions, then resolve aliases using the evaluator mapping when saving schema-valid adjudications. Missing slots remain in the evaluator mapping and original plan; they never count as reviewed or covered. Drafts are deliberately not accepted by the scorer.',
   };
 }

@@ -46,3 +46,17 @@ test('tampered coverage traces cannot become grading evidence even for a clean r
   assert.throws(()=>adjudicationPacket(data.plan,runs,join(root,'packets')),/Artifact hash mismatch/);
  }finally {rmSync(root,{recursive:true,force:true});}
 });
+
+test('an incomplete batch exports available evidence and preserves every missing planned slot',()=>{
+ const root=mkdtempSync(join(tmpdir(),'aberration-adjudication-'));
+ try {
+  const {data,runs}=fixture(root),missing=data.trials[0]!;
+  rmSync(join(runs,missing.slotId,'trial.json'));
+  const result=adjudicationPacket(data.plan,runs,join(root,'packets'));
+  const mapping=JSON.parse(readFileSync(result.mapping,'utf8')) as {alias:string;slotId:string;status:string}[];
+  assert.equal(result.expectedSlots,data.plan.slots.length);assert.equal(result.missingSlots,1);assert.equal(result.packets,data.trials.length-1);
+  const entry=mapping.find(row=>row.slotId===missing.slotId)!;assert.equal(entry.status,'missing');
+  assert.equal(existsSync(join(result.reviewerDirectory,entry.alias)),false);
+  assert.equal(mapping.length,data.plan.slots.length);
+ }finally {rmSync(root,{recursive:true,force:true});}
+});
