@@ -19,7 +19,13 @@ export function adjudicationPacket(planInput: PlanData, runsInput: string, outpu
     const directory = join(runs, slot.id);
     const alias = randomBytes(12).toString('hex');
     if (!existsSync(join(directory, 'trial.json'))) {
-      mapping.push({ alias, slotId: slot.id, caseId: slot.caseId, submissionId: slot.submissionId, status: 'missing' });
+      mapping.push({
+        alias,
+        slotId: slot.id,
+        caseId: slot.caseId,
+        submissionId: slot.submissionId,
+        status: 'missing',
+      });
       continue;
     }
     const trial = Trial.parse(jsonFile(join(directory, 'trial.json')));
@@ -42,7 +48,8 @@ export function adjudicationPacket(planInput: PlanData, runsInput: string, outpu
     saveJson(join(coverage, 'index.json'), {
       alias,
       transcript: { ...trial.transcript, path: transcript },
-      guidance: 'Inspect recorded browser actions/results against the case targets. Narrative coverage claims are not proof. Raw traces can reveal participant identity; adjudicate blinded claims first.',
+      guidance:
+        'Inspect recorded browser actions/results against the case targets. Narrative coverage claims are not proof. Raw traces can reveal participant identity; adjudicate blinded claims first.',
     });
     saveJson(join(dest, 'review.json'), trial.review);
     saveJson(join(dest, 'judgment-draft.json'), {
@@ -70,8 +77,8 @@ export function adjudicationPacket(planInput: PlanData, runsInput: string, outpu
   }
   saveJson(join(output, 'evaluator/mapping.json'), mapping);
   return {
-    packets: mapping.filter(row => row.status !== 'missing').length,
-    missingSlots: mapping.filter(row => row.status === 'missing').length,
+    packets: mapping.filter((row) => row.status !== 'missing').length,
+    missingSlots: mapping.filter((row) => row.status === 'missing').length,
     expectedSlots: plan.slots.length,
     reviewerDirectory: join(output, 'reviewer'),
     mapping: join(output, 'evaluator/mapping.json'),

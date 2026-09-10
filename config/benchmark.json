@@ -1,10 +1,7 @@
 {
   "version": "0.1.0-draft",
   "primaryTrack": "prepared",
-  "tracks": [
-    "prepared",
-    "end-to-end"
-  ],
+  "tracks": ["prepared", "end-to-end"],
   "profiles": [
     {
       "id": "economy",
