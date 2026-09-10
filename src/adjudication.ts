@@ -1,5 +1,5 @@
 import { mkdirSync, copyFileSync } from 'node:fs';
-import { resolve, join, dirname } from 'node:path';
+import { resolve, join, dirname, extname } from 'node:path';
 import { randomBytes } from 'node:crypto';
 import { Plan, Trial } from './contracts.ts';
 import type { PlanData } from './contracts.ts';
@@ -29,6 +29,17 @@ export function adjudicationPacket(planInput: PlanData, runsInput: string, outpu
         mkdirSync(dirname(target), { recursive: true });
         copyFileSync(join(directory, 'artifacts', artifact.path), target);
       }
+    // Clean reviews need observed coverage evidence too. Raw execution traces may
+    // identify the participant, so keep them separate from the blinded claims.
+    const coverage = join(output, 'evaluator', 'coverage', alias);
+    mkdirSync(coverage, { recursive: true });
+    const transcript = `transcript${extname(trial.transcript.path) || '.txt'}`;
+    copyFileSync(join(directory, 'artifacts', trial.transcript.path), join(coverage, transcript));
+    saveJson(join(coverage, 'index.json'), {
+      alias,
+      transcript: { ...trial.transcript, path: transcript },
+      guidance: 'Inspect recorded browser actions/results against the case targets. Narrative coverage claims are not proof. Raw traces can reveal participant identity; adjudicate blinded claims first.',
+    });
     saveJson(join(dest, 'review.json'), trial.review);
     saveJson(join(dest, 'judgment-draft.json'), {
       alias,
@@ -58,7 +69,8 @@ export function adjudicationPacket(planInput: PlanData, runsInput: string, outpu
     packets: mapping.length,
     reviewerDirectory: join(output, 'reviewer'),
     mapping: join(output, 'evaluator/mapping.json'),
+    coverageDirectory: join(output, 'evaluator/coverage'),
     instructions:
-      'Give reviewers only the reviewer directory plus case reproduction materials. Resolve aliases using the evaluator mapping when saving schema-valid adjudications. Drafts are deliberately not accepted by the scorer.',
+      'Give reviewers only the reviewer directory plus case reproduction materials. After blinded claim judgments, the evaluator supplies the preserved coverage traces; those traces may identify participants. Verify actual required-target actions, then resolve aliases using the evaluator mapping when saving schema-valid adjudications. Drafts are deliberately not accepted by the scorer.',
   };
 }

@@ -160,3 +160,9 @@ labels wait for complete adjudication. Paired two-system confidence intervals sa
 whole project/defect families, keeping repeats/controls together. Fewer than two
 families or incomplete judgments withhold intervals; two families is a computation
 guard, not adequate statistical power. No report certifies a public release.
+
+## Coverage evidence in grading packets
+
+`adjudicate` exports the original, hash-verified execution transcript for every submitted trial, including reviews with no findings. Transcripts are stored under `evaluator/coverage/<alias>/` with a hash and artifact-kind index. The reviewer directory continues to contain the original finding content and cited evidence.
+
+Raw traces can identify participants. Reviewers should complete blinded claim judgments first; the evaluator then supplies the corresponding coverage trace for checking actual browser actions/results against required targets. Narrative claims of complete coverage do not establish coverage. Missing or inconclusive trace evidence remains unresolved. This export does not add judgments, grant coverage, rewrite a trial, or change a score.
