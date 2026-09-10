@@ -1,11 +1,31 @@
 {
   "version": "0.1.0-draft",
   "primaryTrack": "prepared",
-  "tracks": ["prepared", "end-to-end"],
+  "tracks": [
+    "prepared",
+    "end-to-end"
+  ],
   "profiles": [
-    { "id": "economy", "maxUsd": 0.25, "maxSeconds": 300 },
-    { "id": "standard", "maxUsd": 1, "maxSeconds": 600 },
-    { "id": "extended", "maxUsd": 5, "maxSeconds": 1800 }
+    {
+      "id": "economy",
+      "maxUsd": 0.25,
+      "maxSeconds": 300
+    },
+    {
+      "id": "standard",
+      "maxUsd": 1,
+      "maxSeconds": 600
+    },
+    {
+      "id": "extended",
+      "maxUsd": 5,
+      "maxSeconds": 1800
+    },
+    {
+      "id": "review-target",
+      "maxUsd": 0.5,
+      "maxSeconds": 300
+    }
   ],
   "primaryProfile": "standard",
   "pilotRepetitions": 3,

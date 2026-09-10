@@ -105,8 +105,13 @@ export async function runSlot(
     }
     // Original diagnostic apps have no install/build phase. Actual startup is measured.
     await session.start();
-    await session.prepare(controller.signal);
-    bridge = await startBridge(session);
+    // External participants own their browser and evidence capture. Starting unused
+    // broker browsers records minutes of duplicate idle video and adds cleanup time.
+    // The same prepared source servers remain available to every adapter.
+    if (config.adapter !== 'diffraction-command') {
+      await session.prepare(controller.signal);
+      bridge = await startBridge(session);
+    }
     ready = performance.now();
     if (plan.track === 'prepared') {
       timer = setTimeout(abort, plan.profile.maxSeconds * 1000);
@@ -184,6 +189,7 @@ export async function runSlot(
       );
       charges.push({ component: 'model', basis: 'measured', usd: 0, receipt });
     } else if (['codex', 'claude', 'cursor'].includes(config.adapter)) {
+      if (!bridge) throw new Error('Native browser bridge unavailable');
       const result = await nativeReview(
         config,
         workspace,

@@ -14,6 +14,7 @@ import { AdapterConfig } from '../src/adapters/config.ts';
 import { pairedIntervals } from '../src/report.ts';
 import { demo } from '../examples/demo.ts';
 import { makePlan } from '../src/plan.ts';
+import { runSlot, submissionFor } from '../src/runtime/run.ts';
 
 const scratch = () => mkdtempSync(join(tmpdir(), 'aberration-test-'));
 const native = {
@@ -331,4 +332,36 @@ test('Paired intervals keep project families together and withhold incomplete ju
     pairedIntervals(plan, d.suite, trials, [], submissions[0].id, 'second').interval,
     null,
   );
+});
+
+
+test('External participants receive prepared source servers without duplicate broker recordings', async () => {
+  const directory = scratch();
+  const prepare = BrowserSession.prototype.prepare;
+  BrowserSession.prototype.prepare = async () => { throw Error('External adapter must own its browser capture'); };
+  try {
+    const built = buildTask('a01', join(directory, 'public'));
+    const script = join(directory, 'external.mjs');
+    writeFileSync(script, `import fs from 'node:fs';
+      const r=JSON.parse(fs.readFileSync(process.argv[2]));
+      for(const origin of Object.values(r.origins)) {
+        const response=await fetch(origin);
+        if(!response.ok || !(await response.text()).includes('notebook')) throw Error('Prepared app unavailable');
+      }
+      fs.writeFileSync(process.argv[3],JSON.stringify({schemaVersion:1,taskDigest:r.taskDigest,track:r.track,
+        pipelineVersion:'fixture',models:['fixture'],status:'completed',review:{findings:[],limitations:['Fixture only']},
+        charges:[],cancellationConfirmed:true,limitations:[]}));`);
+    const config = AdapterConfig.parse({id:'external-fixture', adapter:'diffraction-command', access:'external',
+      model:'fixture', pipelineVersion:'fixture',models:['fixture'],executable:process.execPath,arguments:[script]});
+    const suite = demo().suite;
+    suite.cases = [{...suite.cases[0], id:'a01',taskDigest:built.taskDigest}];
+    const plan = makePlan(suite, [await submissionFor(config)], 'prepared', {id:'fixture',maxUsd:0.5,maxSeconds:10},1,1);
+    const result = await runSlot(plan,suite,plan.slots[0].id,join(directory,'public'),config,join(directory,'run'));
+    assert.equal(result.status,'completed');
+    assert.ok(result.elapsedSeconds < 10);
+    assert.deepEqual(readdirSync(join(directory,'run','artifacts')).filter(n=>/\.(webm|zip)$/.test(n)),[]);
+  } finally {
+    BrowserSession.prototype.prepare = prepare;
+    rmSync(directory,{recursive:true,force:true});
+  }
 });
